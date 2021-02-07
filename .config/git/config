@@ -1,0 +1,9 @@
+[user]
+	name = Noam Zaks
+	email = noamzaks@outlook.com
+[hub]
+	protocol = https
+[credential]
+	helper = store
+[pull]
+	rebase = false

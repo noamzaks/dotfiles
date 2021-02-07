@@ -62,5 +62,14 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export IPYTHONDIR="$JUPYTER_CONFIG_DIR"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
+export NMBGIT="$XDG_DATA_HOME/notmuch/nmbug"
 
 export SHELL_SESSION_HISTORY=0
+
+eval (dircolors "$XDG_CONFIG_HOME/dircolors" | sed 's/LS_COLORS=/set LS_COLORS /g')
+
+# Path
+export PATH="$PATH:$HOME/.local/bin:$XDG_DATA_HOME/yarn/global/node_modules/.bin"
