@@ -53,7 +53,6 @@ export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export PYTHONHISTORY="$XDG_CACHE_HOME/python/history"
 export ATOM_HOME="$XDG_DATA_HOME/atom"
-export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export ANDROID_PREFS_ROOT="$XDG_CONFIG_HOME/android"
 export ADB_KEYS_PATH="$ANDROID_PREFS_ROOT"
@@ -66,6 +65,7 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
 export NMBGIT="$XDG_DATA_HOME/notmuch/nmbug"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/init.py"
 
 export SHELL_SESSION_HISTORY=0
 
