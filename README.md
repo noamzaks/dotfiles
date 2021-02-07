@@ -35,4 +35,4 @@ chsh -s $(which fish)
 ```
 
 ## Wget Hosts
-Put the full path in `hsts-file \= "$XDG_CACHE_HOME/wget-hsts"`. Expand `$XDG_CACHE_HOME` manually.
+Put `hsts-file \= "$XDG_CACHE_HOME/wget-hsts"` in `.config/wgetrc`. Expand `$XDG_CACHE_HOME` manually.
