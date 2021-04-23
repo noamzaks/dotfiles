@@ -11,31 +11,27 @@ Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
-
-" Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'preservim/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
 
 " Themes
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'tomasiser/vim-code-dark'
+Plug 'luochen1990/rainbow'
 
 " Support
 Plug 'darfink/vim-plist'
 call plug#end()
 
-" Cleanup
-" set viminfofile=.cache/vim/viminfo
-" set viminfo+="100,.cache/vim/viminfo
-
 let g:airline_exclude_filetypes = []
-
-" Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | set guicursor=a:ver10-blinkoff0 | quit | endif
+let g:rainbow_active = 1
 
 " Automatic Commands
 autocmd BufWritePost *.tex silent! execute '!pdflatex % >/dev/null 2>&1; open %:r.pdf; rm *.aux *.log;'
@@ -50,9 +46,25 @@ autocmd BufWritePost *.ts silent! execute '!prettier -w % >/dev/null 2>&1; :edit
 autocmd BufWritePost *.jsx silent! execute '!prettier -w % >/dev/null 2>&1; :edit'
 autocmd BufWritePost *.tsx silent! execute '!prettier -w % >/dev/null 2>&1; :edit'
 
+"" Language Servers
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+set completeopt=menuone,noinsert,noselect
+autocmd BufEnter * lua require'completion'.on_attach()
+
+lua << EOF
+local lspconfig = require'lspconfig'
+lspconfig.clangd.setup{}
+lspconfig.tsserver.setup{}
+lspconfig.jedi_language_server.setup{}
+EOF
+
+nnoremap gD :lua vim.lsp.buf.declaration()<CR>
+nnoremap gc :lua vim.lsp.buf.code_action()<CR>
+
 " Shortcuts
-map <C-n> :NERDTreeToggle<CR>
-map <C-h> :SClose<CR>
+nnoremap ty :NERDTreeToggle<CR>
+map tt <leader>c<space>
 imap jk <Esc>
 
 "" I-Beam
@@ -62,26 +74,8 @@ augroup restore_cursor_shape
 augroup END
 
 "" Theme
-colorscheme dracula
-let g:airline_theme='dracula'
-
-"" Airline
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = '' " e0b0
-let g:airline_right_sep = '' " e0b2
-let g:airline_symbols.linenr = '¶' " 204b
-let g:airline_symbols.branch = '⎇' " 2387
-let g:airline_symbols.paste = 'ρ' " 03c1
-let g:airline_symbols.whitespace = 'Ξ' " 03be
-
-"" Keyboard Shortcuts
-nnoremap <C-b> :NERDTreeToggle<CR>
-nnoremap <C-j> :NERDTreeToggle<CR>
+colorscheme codedark
+let g:airline_theme='codedark'
 
 "" Tabs
 set tabstop=4
