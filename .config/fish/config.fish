@@ -1,22 +1,28 @@
-# Prompt & Greeting
 set -g fish_prompt_pwd_dir_length 80
 
 function fish_prompt
     echo
-    set_color red
-    echo -n "╭ "
+    set_color cyan
+    echo -n "noam "
+    set_color normal
+    echo -n "at "
     set_color magenta
+    echo -n "core "
+    set_color normal
+    echo -n "in "
+    set_color blue
     echo (prompt_pwd)
-    set_color red
-	echo -n "╰ "
     set_color yellow
-    echo -n "ε "
+    echo -n "λ "
     set_color normal
 end
 
 function fish_right_prompt
-    set_color cyan
-	echo -n "∀ε ∃δ"
+    set_color yellow
+	if git symbolic-ref HEAD > /dev/null 2>&1
+		echo -n " "
+		echo (git rev-parse --abbrev-ref HEAD 2> /dev/null)
+	end
     set_color normal
 end
 
@@ -24,7 +30,6 @@ function fish_greeting
     # fortune | cowthink
 end
 
-# Abbreviations
 abbr -ag     v              nvim
 abbr -ag     vim            nvim
 abbr -ag     py             python3
@@ -32,21 +37,16 @@ abbr -ag     python         python3
 abbr -ag     la             ls -la
 abbr -ag     ll             ls -l
 abbr -ag     l              ls -l
-abbr -ag     git            hub
 abbr -ag     please         sudo
 
-# Aliases
 alias        ls             "exa --group-directories-first"
 alias        clear          "printf '\33c\e[3J'"
 alias        wget           "wget --hsts-file=\"$XDG_CACHE_HOME/wget-hsts\""
-alias        yarn           "yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 
-# XDG
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# Cleanup
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 export LESSKEY="$XDG_CONFIG_HOME/less/lesskey"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
@@ -67,9 +67,4 @@ export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/notmuchrc"
 export NMBGIT="$XDG_DATA_HOME/notmuch/nmbug"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/init.py"
 
-export SHELL_SESSION_HISTORY=0
-
-eval (dircolors "$XDG_CONFIG_HOME/dircolors" | sed 's/LS_COLORS=/set LS_COLORS /g')
-
-# Path
 export PATH="$PATH:$HOME/.local/bin:$XDG_DATA_HOME/yarn/global/node_modules/.bin"

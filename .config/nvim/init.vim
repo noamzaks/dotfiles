@@ -56,7 +56,7 @@ lua << EOF
 local lspconfig = require'lspconfig'
 lspconfig.clangd.setup{}
 lspconfig.tsserver.setup{}
-lspconfig.jedi_language_server.setup{}
+lspconfig.pyls.setup{}
 EOF
 
 nnoremap gD :lua vim.lsp.buf.declaration()<CR>
@@ -74,8 +74,8 @@ augroup restore_cursor_shape
 augroup END
 
 "" Theme
-colorscheme codedark
-let g:airline_theme='codedark'
+colorscheme dracula
+let g:airline_theme='dracula'
 
 "" Tabs
 set tabstop=4
